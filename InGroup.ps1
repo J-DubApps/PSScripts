@@ -1,9 +1,11 @@
 function InGroup {
     <#
            .SYNOPSIS
-               Check if the current user is in a specified group
+               Check if the current user is in a specified group using .NET Framework
            .DESCRIPTION
                Check if the current user is in a specified group
+               Uses WindowsIdentity .NET Class, so it does NOT 
+               require RSAT ActiveDirectory module to be loaded.
            .PARAMETER GroupName
                The name of the group to check
            .EXAMPLE
