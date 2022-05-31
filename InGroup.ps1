@@ -15,7 +15,8 @@ function InGroup {
               |   |                                         |    |            
               |   |      https://github.com/J-DubAppss      |    |            
               |   |                                         |    |            
-              |   |                                         |    |            
+              |   |             julianwest.me				|    |   
+              |   |       		@julian_west                |    |         
               |   |                                         |    |            
               |   |                                         |    |            
               |   |                                         |    |            
