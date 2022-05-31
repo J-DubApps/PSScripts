@@ -58,7 +58,7 @@ Function Test-AzureCloudShell {
 
 	If(($PSVersionTable.PSEdition.ToString() -eq 'Core') -and ($ACScheck -match 'azure')){
 	# Test $PSVersionTable PSEdition & OS outputs for two tell-tale Azure Cloud environment signs
-	# Return $true if output onditions both are present, $false if no match.
+	# Return $true if output both conditions are present, $false if no match.
 	
 		return $true
     }else{
