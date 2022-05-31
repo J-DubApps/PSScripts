@@ -54,7 +54,7 @@
 
 Function Test-AzureCloudShell {
 
-    $ACScheck = $PSVersionTable.OS.ToString() | select-string -pattern "azure" | Out-String
+    $ACScheck = $PSVersionTable | select-object OS | select-string -pattern "azure" | Out-String
 
 	If(($PSVersionTable.PSEdition.ToString() -eq 'Core') -and ($ACScheck -match 'azure')){
 	# Test $PSVersionTable PSEdition & OS outputs for two tell-tale Azure Cloud environment signs
