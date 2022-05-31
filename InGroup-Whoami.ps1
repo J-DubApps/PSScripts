@@ -1,21 +1,50 @@
 <#
+            Name: InGroup_Whoami.ps1
+            05 April 2022
+        .NOTES
+            Author: Julian West
+            Creative GNU General Public License, version 3 (GPLv3);
+            ________________________________________________              
+            /                                                \             
+           |    _________________________________________     |            
+           |   |                                         |    |            
+           |   |  PS C:\ > WRITE-HOST "$ATTRIBUTION"     |    |            
+           |   |                                         |    |            
+           |   |         THIS IS A J-DUB SCRIPT          |    |            
+           |   |      https://github.com/J-DubApps       |    |            
+           |   |                                         |    |            
+           |   |                                         |    |            
+           |   |                                         |    |            
+           |   |                                         |    |            
+           |   |                                         |    |            
+           |   |                                         |    |            
+           |   |                                         |    |            
+           |   |                                         |    |            
+           |   |_________________________________________|    |            
+           |                                                  |            
+            \_________________________________________________/            
+                   \___________________________________/                   
+                ___________________________________________                
+             _-'    .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.  --- `-_             
+          _-'.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.--.  .-.-.`-_          
+       _-'.-.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-`__`. .-.-.-.`-_       
+    _-'.-.-.-.-. .-----.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-----. .-.-.-.-.`-_    
+ _-'.-.-.-.-.-. .---.-. .-------------------------. .-.---. .---.-.-.-.`-_ 
+:-------------------------------------------------------------------------:
+`---._.-------------------------------------------------------------._.---'
         .SYNOPSIS
-            Check if the current user is in a specified group using output from whoami.exe utiil
+            Code to check if the current user is a member of a specified AD group using output from whoami.exe
         .DESCRIPTION
             Does NOT require RSAT ActiveDirectory module or .NET Classes to get true/false group membership
             for current user. Uses search-string method to extract output from whoami.exe, and determine if 
             the specified AD Group was in the whoami.exe output.  
             I had a situation where I needed a non-admin logon script on Windows 10 endpoints to be able to
             check if the current user was a member of a specific AD group, and I couldn't use the 
-            WindowsIdentity .NET Class, and is impractical to ever push the RSAT ActiveDirectory PS Module to 
-            end-user Windows endpoints.
+            WindowsIdentity .NET Class, and is impractical to push the RSAT ActiveDirectory PS Module to 
+            thousands of Windows endpoints.
             This is what I came up with, and it works fairly well but has NOT been tested beyond my own 
-            lab and work environments.
-            NOTE: I do not believe this works reliably with AD groups with spaces in their names.
-            NOTE2 Why MS never put "Kix-like" quick Ingroup checks into Powershell, where it never needs
-                to be importing the ActiveDirectory module or using a .NET class -- I will never know.
-                I love .NET and all and GPO/GPP is fine - but this one missing feature alone slowed PS 
-                logon script adoption  /rant-off :)
+            lab and work environment.
+            # NOTE: I do not believe this works reliably with AD groups with spaces in their names.
         .PARAMETER GroupName
             The name of the group to check
         .EXAMPLE
@@ -83,3 +112,4 @@ If(!$Search -eq $AD_Group_Name){
 
 
 # write-host "Run Complete"
+s
