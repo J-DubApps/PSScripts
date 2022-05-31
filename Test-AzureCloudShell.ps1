@@ -14,8 +14,8 @@
               |   |                                         |    |            
               |   |      https://github.com/J-DubAppss      |    |            
               |   |                                         |    |            
-              |   | 	       julianwest.me		    |    |   
-              |   |       	@julian_west                |    |            
+              |   | 	       julianwest.me                |    |   
+              |   |             @julian_west                |    |            
               |   |                                         |    |            
               |   |                                         |    |            
               |   |                                         |    |            
