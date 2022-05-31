@@ -1,11 +1,44 @@
 function InGroup {
     <#
+               Name: InGroup.ps1
+               05 April 2022
+           .NOTES
+               Author: Julian West
+               Creative GNU General Public License, version 3 (GPLv3);
+                ________________________________________________              
+               /                                                \             
+              |    _________________________________________     |            
+              |   |                                         |    |            
+              |   |  PS C:\ > WRITE-HOST "$ATTRIBUTION"     |    |            
+              |   |                                         |    |            
+              |   |         THIS IS A J-DUB SCRIPT          |    |            
+              |   |                                         |    |            
+              |   |      https://github.com/J-DubAppss      |    |            
+              |   |                                         |    |            
+              |   |                                         |    |            
+              |   |                                         |    |            
+              |   |                                         |    |            
+              |   |                                         |    |            
+              |   |                                         |    |            
+              |   |                                         |    |            
+              |   |_________________________________________|    |            
+              |                                                  |            
+               \_________________________________________________/            
+                      \___________________________________/                   
+                   ___________________________________________                
+                _-'    .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.  --- `-_             
+             _-'.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.--.  .-.-.`-_          
+          _-'.-.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-`__`. .-.-.-.`-_       
+       _-'.-.-.-.-. .-----.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-----. .-.-.-.-.`-_    
+    _-'.-.-.-.-.-. .---.-. .-------------------------. .-.---. .---.-.-.-.`-_ 
+   :-------------------------------------------------------------------------:
+   `---._.-------------------------------------------------------------._.---'
            .SYNOPSIS
-               Check if the current user is in a specified group using .NET Framework
-           .DESCRIPTION
                Check if the current user is in a specified group
-               Uses WindowsIdentity .NET Class, so it does NOT 
-               require RSAT ActiveDirectory module to be loaded.
+           .DESCRIPTION
+               Check if the current user is in a specified group using .NET Framework
+               Variations of the PS script exists all over Github in various forms and
+               functions, and this is just my own quick take on it.
            .PARAMETER GroupName
                The name of the group to check
            .EXAMPLE
