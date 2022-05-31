@@ -1,5 +1,5 @@
   <#
-               Name: InGroup.ps1
+               Name: Test-AzureCloudShell.ps1
                31 May 2022
            .NOTES
                Author: Julian West
