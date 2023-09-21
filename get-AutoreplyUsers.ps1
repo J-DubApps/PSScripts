@@ -51,9 +51,7 @@ Author: Julian West
 .LINK
     https://julianwest.me
 .LINK
-    https://github.com/J-DubApps/PS-MANAGE/CHANGELOG.TXT
-.LINK
-    https://github.com/J-DubApps/PS-MANAGE
+    https://github.com/J-DubApps/PSScripts/blob/main/get-AutoreplyUsers.ps1
 .COMPONENT
     --
 .FUNCTIONALITY
