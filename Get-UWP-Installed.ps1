@@ -4,9 +4,9 @@ using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 <#
 .SYNOPSIS
-    Provides a list of all available Microsfoft UWP Appx / MSIX apps on a Win10 or Win11 host.
+    Provides a list of all installed UWP Appx apps on a Win10 or Win11 host.
 .DESCRIPTION
-    Provides a list of all available MS UWP Appx / MSIX apps on a Win10 or Win11 host.  Useful for reviewing and standardization of Windows Endpoints.
+    Provides a list of all currently installed UWP Appx apps on a Win10 or Win11 host.  Useful for OSD and standardiation in MDT / SCCM / Intune / etc.
     Must be run as an administrator.
 .PARAMETER
     --.
@@ -52,7 +52,7 @@ Author: Julian West
 .LINK
     https://julianwest.me
 .LINK
-    https://github.com/J-DubApps/PSScripts/blob/main/get-UWP-Apps.ps1
+    https://github.com/J-DubApps/PSScripts/blob/main/get-UWP-Installed.ps1
 .COMPONENT
     --
 .FUNCTIONALITY
@@ -71,29 +71,24 @@ if ($ENV:PROCESSOR_ARCHITEW6432 -eq 'AMD64') {
 #endregion ARM64Handling
 
 
-# Run this script as an administrator
-
-# Import the DISM module if not already loaded
-Import-Module DISM
-
 # Initialize an empty array to hold the package information
-$defaultUWPApps = @()
+$installedUWPApps = @()
 
-# Get all packages
-$allPackages = Get-WindowsPackage -Online
+# Get all installed Appx packages
+$allAppxPackages = Get-AppxPackage
 
-# Filter out only Microsoft UWP apps
-foreach ($package in $allPackages) {
-  if ($package.PackageName -like "*Microsoft.*" -or $package.PackageName -like "*windows*") {
-    $defaultUWPApps += $package
+# Filter out only the UWP apps that are pre-installed
+foreach ($appx in $allAppxPackages) {
+  if ($appx.Name -like "*Microsoft.*" -or $appx.Name -like "*windows*") {
+    $installedUWPApps += $appx
   }
 }
 
-# Display the default UWP apps
-$defaultUWPApps | Select-Object PackageName, State | Format-Table -AutoSize
+# Display the installed UWP apps
+$installedUWPApps | Select-Object Name, PackageFullName, InstallLocation | Format-Table -AutoSize
 
 # Optionally, you can export this information to a CSV file
-#$defaultUWPApps | Select-Object PackageName, State | Export-Csv -Path "C:\Path\To\Save\defaultUWPApps.csv" -NoTypeInformation
+#$installedUWPApps | Select-Object Name, PackageFullName, InstallLocation | Export-Csv -Path "C:\Path\To\Save\installedUWPApps.csv" -NoTypeInformation
 
 exit 0
 
