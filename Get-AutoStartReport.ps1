@@ -1,4 +1,6 @@
 #Requires -Version 5.1
+#Requires -Version 5.1
+#Requires -PSEdition Desktop
 <#
 .SYNOPSIS
     Scans common Windows autostart locations and displays a sortable, searchable GUI report.
@@ -10,13 +12,62 @@
 
     Does NOT require elevation, but running as Administrator will surface additional machine-level
     scheduled tasks and services that a standard user context cannot enumerate.
-
+.PARAMETER
+    --.
+.EXAMPLE
+    Get-AutoStartReport.ps1
+.INPUTS
+    None.
+.OUTPUTS
+    List of Startup Items discovered + optional csv export of resulting list.
 .NOTES
     Author  : Julian West (with a quick-assist from Claude Code / Anthropic)
-    Version : 1.1.0
+    Version : 1.2.0
     Date    : 2026-03-20
     Target  : PowerShell 5.1+ on Windows 10/11
+    
+               BSD 3-Clause License;
+               - see License Region at-end of script for more information
+                ________________________________________________
+               /                                                \
+              |    _________________________________________     |
+              |   |                                         |    |
+              |   |  PS C:\ > WRITE-HOST $ATTRIBUTION	    |    |
+              |   |                                         |    |
+              |   |         THIS IS A J-DUB SCRIPT          |    |
+              |   |                                         |    |
+              |   |      https://github.com/J-DubAppss      |    |
+              |   |                                         |    |
+              |   | 	       julianwest.me                |    |
+              |   |             @julian_west                |    |
+              |   |                                         |    |
+              |   |                                         |    |
+              |   |                                         |    |
+              |   |                                         |    |
+              |   |                                         |    |
+              |   |_________________________________________|    |
+              |                                                  |
+               \_________________________________________________/
+                      \___________________________________/
+                   ___________________________________________
+                _-'    .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.  --- `-_
+             _-'.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.--.  .-.-.`-_
+          _-'.-.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-`__`. .-.-.-.`-_
+       _-'.-.-.-.-. .-----.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-----. .-.-.-.-.`-_
+    _-'.-.-.-.-.-. .---.-. .-------------------------. .-.---. .---.-.-.-.`-_
+   :-------------------------------------------------------------------------:
+   `---._.-------------------------------------------------------------._.---'
+.LINK
+    https://julianwest.me
+.LINK
+    https://github.com/J-DubApps/PSScripts/blob/main/Get-AutoStartReport.ps1
+.COMPONENT
+    --
+.FUNCTIONALITY
+    --
 #>
+if ($ENV:PROCESSOR_ARCHITEW6432 -eq 'AMD64') {
+  try {
 
 [CmdletBinding()]
 param()
