@@ -29,10 +29,21 @@
 .EXAMPLE
     .\Get-AutoStartReport.ps1 -ExcludeServices
     Everything except services.
+    
+.EXAMPLE
+    .\Get-AutoStartReport.ps1 -ExportOnly
+    Full scan, no GUI — writes CSV to %USERPROFILE%\Downloads.
+ 
+.EXAMPLE
+    .\Get-AutoStartReport.ps1 -ExportOnly -ExcludeServices -ExcludeScheduledTasks
+    Lightweight headless export for RMM deployment.
+
 .INPUTS
     None.
+
 .OUTPUTS
     List of Startup Items discovered + optional csv export of resulting list.
+
 .NOTES
     Author  : Julian West (with a quick-assist from Claude Code / Anthropic)
     Version : 1.2.0
@@ -83,7 +94,8 @@
 [CmdletBinding()]
 param(
     [switch]$ExcludeServices,
-    [switch]$ExcludeScheduledTasks
+    [switch]$ExcludeScheduledTasks,
+    [switch]$ExportOnly
 )
 
 if ($ENV:PROCESSOR_ARCHITEW6432 -eq 'AMD64') {
@@ -99,9 +111,11 @@ if ($ENV:PROCESSOR_ARCHITEW6432 -eq 'AMD64') {
 #endregion ARM64Handling
 
 #region ── Assembly Loading ──────────────────────────────────────────────────────
-Add-Type -AssemblyName System.Windows.Forms
-Add-Type -AssemblyName System.Drawing
-[System.Windows.Forms.Application]::EnableVisualStyles()
+if (-not $ExportOnly) {
+    Add-Type -AssemblyName System.Windows.Forms
+    Add-Type -AssemblyName System.Drawing
+    [System.Windows.Forms.Application]::EnableVisualStyles()
+}
 #endregion
  
 #region ── Helper Functions ──────────────────────────────────────────────────────
@@ -406,7 +420,31 @@ Write-Host "Found $($results.Count) autostart entries.$excludeNote" -ForegroundC
  
 #endregion
  
-#region ── Build GUI ─────────────────────────────────────────────────────────────
+#region ── Output: Headless CSV or GUI ───────────────────────────────────────────
+ 
+if ($ExportOnly) {
+    # ── Headless CSV Export ──
+    $computerName = $env:COMPUTERNAME
+    $downloadsPath = Join-Path -Path $env:USERPROFILE -ChildPath 'Downloads'
+ 
+    # Fallback if Downloads doesn't exist (e.g., server core, service account)
+    if (-not (Test-Path -LiteralPath $downloadsPath)) {
+        $downloadsPath = $env:TEMP
+        Write-Warning "Downloads folder not found. Falling back to: $downloadsPath"
+    }
+ 
+    $csvFileName = "AutostartReport_${computerName}_$(Get-Date -Format 'yyyyMMdd_HHmmss').csv"
+    $csvPath     = Join-Path -Path $downloadsPath -ChildPath $csvFileName
+ 
+    $results | Export-Csv -Path $csvPath -NoTypeInformation -Encoding UTF8
+    Write-Host "Exported $($results.Count) entries to: $csvPath" -ForegroundColor Green
+ 
+    # Emit the path as output for RMM tools to capture
+    Write-Output $csvPath
+    return
+}
+ 
+# ── Interactive GUI (default) ──
  
 $computerName = $env:COMPUTERNAME
 $userName     = $env:USERNAME
