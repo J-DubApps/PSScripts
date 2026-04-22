@@ -2,7 +2,7 @@
 
 ## Description
 
-This repo contains Powershell scripts which are a mix of custom (mine) and publicly-available works of others (attribution provided whenever I have it).
+This repo contains Powershell scripts which are a mix of custom (mine) and forked works of others (attribution provided whenever I have it).
 
 ## Scripts
 
